@@ -1,0 +1,25 @@
+{
+  "name": "block-encryption",
+  "version": "1.0.0",
+  "description": "A simple project to implement block encryption with JavaScript",
+  "homepage": "https://github.com/emmauscc/block-encryption-le-jolly-fellows#readme",
+  "bugs": {
+    "url": "https://github.com/emmauscc/block-encryption-le-jolly-fellows/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmauscc/block-encryption-le-jolly-fellows.git"
+  },
+  "license": "ISC",
+  "author": "JM & ID",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0"
+  }
+}
