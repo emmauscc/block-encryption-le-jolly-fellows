@@ -5,6 +5,9 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"DavidAnson.vscode-markdownlint",
+				"streetsidesoftware.code-spell-checker",
 				"esbenp.prettier-vscode"
 			]
 		}
