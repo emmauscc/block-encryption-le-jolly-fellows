@@ -19,6 +19,21 @@
 
 # Function explanations
 
+## function randomBinary(length)
+
+Assignee: `JM`
+
+- [ ] Completed?
+
+1. Define `binaryCode` as empty
+    - `let binaryCode;`
+2. Loop over code `length` amount of times
+    - `for (let i = 0; i < length; i++){}`
+3. Inside loop add random 1 or 0 to `binaryCode`
+    - `binaryCode += Math.floor(Math.random() * 2);`
+4. Exit loop and return `binaryCode`
+    - `return(binaryCode);`
+
 ## function textToASCII(text)
 
 Assignee: `ID`
@@ -27,13 +42,13 @@ Assignee: `ID`
 
 NOTE: Don't use joining space when `i == 0`
 
-1. Define asciiMessage as empty
+1. Define `asciiMessage` as empty
     - `let asciiMessage;`
 2. Loop over every character in the message
     - `for (let i = 0; i < text.length; i++){}`
 3. Inside the loop convert every character to binary
     - `asciiMessage = asciiMessage.concat(" ", text.charCodeAt(i));`
-4. Exit loop and return new asciiMessage
+4. Exit loop and return new `asciiMessage`
     - `return(asciiMessage);`
 
 ## function ASCIIToBinary(text)
@@ -42,9 +57,9 @@ Assignee: `ID`
 
 - [ ] Completed?
 
-1. Define binaryMessage as empty
+1. Define `binaryMessage` as empty
     - `let binaryMessage;`
 2. Convert the message to binary and export it
     - `binaryMessage = text.toString(2);`
-3. Return new binaryMessage
+3. Return new `binaryMessage`
     - `return(binaryMessage);`
