@@ -21,6 +21,10 @@
 
 ## function textToASCII(text)
 
+Assignee: `ID`
+
+- [ ] Completed?
+
 NOTE: Don't use joining space when `i == 0`
 
 1. Define asciiMessage as empty
@@ -33,6 +37,10 @@ NOTE: Don't use joining space when `i == 0`
     - `return(asciiMessage);`
 
 ## function ASCIIToBinary(text)
+
+Assignee: `ID`
+
+- [ ] Completed?
 
 1. Define binaryMessage as empty
     - `let binaryMessage;`
