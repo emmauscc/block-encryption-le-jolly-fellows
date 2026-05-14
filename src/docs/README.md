@@ -23,7 +23,7 @@
 
 Assignee: `JM`
 
-- [ ] Completed?
+- [] Completed?
 
 1. Define `binaryCode` as empty
     - `let binaryCode;`
@@ -38,7 +38,7 @@ Assignee: `JM`
 
 Assignee: `ID`
 
-- [ ] Completed?
+- [yes] Completed?
 
 NOTE: Don't use joining space when `i == 0`
 
@@ -55,7 +55,7 @@ NOTE: Don't use joining space when `i == 0`
 
 Assignee: `ID`
 
-- [ ] Completed?
+- [yes] Completed?
 
 1. Define `binaryMessage` as empty
     - `let binaryMessage;`
