@@ -3,6 +3,7 @@
 ## Pre-encryption setup
 
 1. Set the message variable (string)
+    - Or read from command line
 2. Set encryption/decryption key
 3. Create a random IV (8 bit binary) at runtime
 4. Define other variables to be used in process
@@ -23,43 +24,80 @@
 
 Assignee: `JM`
 
-- [] Completed?
+- [X] Completed?
 
-1. Define `binaryCode` as empty
-    - `let binaryCode;`
+1. Define `binaryCode` as empty string
+    - `let binaryCode = "";`
 2. Loop over code `length` amount of times
     - `for (let i = 0; i < length; i++){}`
 3. Inside loop add random 1 or 0 to `binaryCode`
     - `binaryCode += Math.floor(Math.random() * 2);`
 4. Exit loop and return `binaryCode`
-    - `return(binaryCode);`
+    - `return binaryCode;`
 
 ## function textToASCII(text)
 
 Assignee: `ID`
 
-- [yes] Completed?
+- [X] Completed?
 
-NOTE: Don't use joining space when `i == 0`
-
-1. Define `asciiMessage` as empty
-    - `let asciiMessage;`
+1. Define `asciiArray` as empty array
+    - `let asciiArray = [];`
 2. Loop over every character in the message
     - `for (let i = 0; i < text.length; i++){}`
 3. Inside the loop convert every character to binary
-    - `asciiMessage = asciiMessage.concat(" ", text.charCodeAt(i));`
-4. Exit loop and return new `asciiMessage`
-    - `return(asciiMessage);`
+    - `asciiArray[i] = text.charCodeAt(i);`
+4. Exit loop and return new `asciiArray`
+    - `return asciiArray;`
 
 ## function ASCIIToBinary(text)
 
 Assignee: `ID`
 
-- [yes] Completed?
+- [X] Completed?
 
-1. Define `binaryMessage` as empty
-    - `let binaryMessage;`
-2. Convert the message to binary and export it
-    - `binaryMessage = text.toString(2);`
-3. Return new `binaryMessage`
-    - `return(binaryMessage);`
+1. Define `binaryArray` as empty array
+    - `let binaryArray = [];`
+2. Loop over every character in the message
+    - `for (let i = 0; i < text.length; i++) {}`
+3. Add `0` to the front and convert to binary
+    - `binaryArray[i] = "0" + text[i].toString(2);`
+4. Exit loop and return new `binaryArray`
+    - `return binaryArray;`
+
+## function XORgate(text, IV)
+
+Assignee: `JM`
+
+- [X] Completed?
+
+1. Define `XORArray` as empty array
+    - `let XORArray = [];`
+2. Loop over every character in the message
+    - `for (let i = 0; i < text.length; i++) {}`
+3. Define `binaryString` as empty string
+    - `let binaryString = "";`
+4. Loop over every binary character in the message
+    - - `for (let j = 0; j < text[i].length; j++) {}`
+5. Use XOR operator with current binary character and matching IV value
+    - `binaryString += text[i][j] ^ IV[j];`
+6. Exit binary character loop, push new `binaryString` to `XORArray`
+    - `return binaryArray;`
+7. Exit character loop and return new `XORArray`
+    - `return XORArray;`
+
+
+## function encryptText(text)
+
+Assignee: `JM`
+
+- [X] Completed?
+
+1. Send text to `textToASCII` function
+    - `textToASCII(text);`
+2. Then send it to the `ASCIIToBinary` function
+    - `ASCIIToBinary(text);`
+3. Finally send to the `XORgate` function
+    - `XORgate(text, IV);`
+4. Return the newly encrypted text
+    - `return text;`
