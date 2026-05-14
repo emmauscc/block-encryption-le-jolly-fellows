@@ -21,18 +21,22 @@
 
 ## function textToASCII(text)
 
-NOTE: Use existing asciiMessage from outside this function
-
 NOTE: Don't use joining space when `i == 0`
 
-1. Loop over every character in the message
+1. Define asciiMessage as empty
+    - `let asciiMessage;`
+2. Loop over every character in the message
     - `for (let i = 0; i < text.length; i++){}`
-2. Inside the loop convert every character to binary
-    - `asciiMessage.concat(" ", charCodeAt(i));`
+3. Inside the loop convert every character to binary
+    - `asciiMessage = asciiMessage.concat(" ", text.charCodeAt(i));`
+4. Exit loop and return new asciiMessage
+    - `return(asciiMessage);`
 
 ## function ASCIIToBinary(text)
 
-NOTE: Use existing binaryMessage from outside this function
-
-1. Convert the message to binary and export it
+1. Define binaryMessage as empty
+    - `let binaryMessage;`
+2. Convert the message to binary and export it
     - `binaryMessage = text.toString(2);`
+3. Return new binaryMessage
+    - `return(binaryMessage);`
