@@ -78,14 +78,15 @@ Assignee: `JM`
 3. Define `binaryString` as empty string
     - `let binaryString = "";`
 4. Loop over every binary character in the message
-    - - `for (let j = 0; j < text[i].length; j++) {}`
+    - `for (let j = 0; j < text[i].length; j++) {}`
 5. Use XOR operator with current binary character and matching IV value
     - `binaryString += text[i][j] ^ IV[j];`
 6. Exit binary character loop, push new `binaryString` to `XORArray`
-    - `return binaryArray;`
-7. Exit character loop and return new `XORArray`
+    - `XORArray.push(binaryString);`
+7. Use last `binaryString` as the new `IV`
+    - `IV = binaryString;`
+8. Exit character loop and return new `XORArray`
     - `return XORArray;`
-
 
 ## function encryptText(text)
 

@@ -52,7 +52,6 @@ function ASCIIToBinary(text) {
   return binaryArray;
 }
 
-// TODO: Use last character IV as current IV
 function XORgate(text, IV) {
   let XORArray = [];
 
@@ -63,6 +62,7 @@ function XORgate(text, IV) {
       binaryString += text[i][j] ^ IV[j];
     }
     XORArray.push(binaryString);
+    IV = binaryString;
   }
 
   return XORArray;
