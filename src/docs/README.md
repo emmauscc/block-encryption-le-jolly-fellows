@@ -88,7 +88,7 @@ Assignee: `JM`
 8. Exit character loop and return new `XORArray`
     - `return XORArray;`
 
-## function encryptText(text)
+## function encryptText(text, IV)
 
 Assignee: `JM`
 
@@ -100,5 +100,5 @@ Assignee: `JM`
     - `ASCIIToBinary(text);`
 3. Finally send to the `XORgate` function
     - `XORgate(text, IV);`
-4. Return the newly encrypted text
-    - `return text;`
+4. Return result of the chained functions
+    - `return XORgate(ASCIIToBinary(textToASCII(text)), IV);`

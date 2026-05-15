@@ -8,7 +8,7 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 rl.question("What text do you want to encrypt? ", (plainText) => {
   console.log("Using text: " + plainText);
 
-  encryptedText = encryptText(plainText);
+  encryptedText = encryptText(plainText, initializationVector);
 
   console.log("The original text in binary:");
   console.log(String(ASCIIToBinary(textToASCII(plainText))));
@@ -69,7 +69,6 @@ function XORgate(text, IV) {
 }
 
 // TODO: Implement cipher such as the caesar cipher
-function encryptText(text) {
-  text = XORgate(ASCIIToBinary(textToASCII(text)), initializationVector);
-  return text;
+function encryptText(text, IV) {
+  return XORgate(ASCIIToBinary(textToASCII(text)), IV);
 }
