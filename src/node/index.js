@@ -11,13 +11,13 @@ rl.question("What text do you want to encrypt? ", (plainText) => {
   encryptedText = encryptText(plainText, initializationVector);
 
   console.log("The original text in binary:");
-  console.log(String(ASCIIToBinary(textToASCII(plainText))));
-
-  console.log("The encrypted text in binary:");
-  console.log(String(encryptedText));
+  console.log(ASCIIToBinary(textToASCII(plainText)));
 
   console.log("Using the initialization vector:");
   console.log(initializationVector);
+
+  console.log("The encrypted text in binary:");
+  console.log(encryptedText);
 
   rl.close();
 });
@@ -68,9 +68,8 @@ function XORgate(text, IV) {
   return XORArray;
 }
 
-// TODO: Implement cipher such as the caesar cipher
 function encryptText(text, IV) {
-  return XORgate(ASCIIToBinary(textToASCII(text)), IV);
+  return caesarCipher(XORgate(ASCIIToBinary(textToASCII(text)), IV), 5);
 }
 
 function numberToBinary(number, length) {
@@ -79,4 +78,12 @@ function numberToBinary(number, length) {
     binaryCode = "0" + binaryCode;
   }
   return binaryCode;
+}
+
+function caesarCipher(text, key) {
+  let cipherText = [];
+  for (let i = 0; i < text.length; i++) {
+    cipherText.push(parseInt(text[i], 2) + parseInt(numberToBinary(key, 8), 2).toString(2));
+  }
+  return cipherText;
 }
