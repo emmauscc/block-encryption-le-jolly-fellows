@@ -102,3 +102,18 @@ Assignee: `JM`
     - `XORgate(text, IV);`
 4. Return result of the chained functions
     - `return XORgate(ASCIIToBinary(textToASCII(text)), IV);`
+
+## function numberToBinary(number, length)
+
+Assignee: `JM`
+
+- [X] Completed?
+
+1. Define `binaryCode` as `number`'s binary representation then convert to string
+    - `let binaryCode = (number >>> 0).toString(2);`
+2. Loop for `length` minus initial `binaryCode` length
+    - `for (let i = 0; i < length - (number >>> 0).toString(2).length; i++) {}`
+3. Inside of the loop add `"0"` to the front of `binaryCode`
+    - `binaryCode = "0" + binaryCode;`
+4. Exit loop and return the result `binaryCode`
+    - `return binaryCode;`

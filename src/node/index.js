@@ -72,3 +72,11 @@ function XORgate(text, IV) {
 function encryptText(text, IV) {
   return XORgate(ASCIIToBinary(textToASCII(text)), IV);
 }
+
+function numberToBinary(number, length) {
+  let binaryCode = (number >>> 0).toString(2);
+  for (let i = 0; i < length - (number >>> 0).toString(2).length; i++) {
+    binaryCode = "0" + binaryCode;
+  }
+  return binaryCode;
+}
