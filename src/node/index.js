@@ -1,6 +1,6 @@
 import readline from "readline";
 
-let initializationVector = randomBinary(8);
+let initializationVector = "00000111";
 let encryptedText;
 
 let rl = readline.createInterface(process.stdin, process.stdout);
@@ -69,7 +69,7 @@ function XORgate(text, IV) {
 }
 
 function encryptText(text, IV) {
-  return caesarCipher(XORgate(ASCIIToBinary(textToASCII(text)), IV), 5);
+  return caesarCipher(XORgate(ASCIIToBinary(textToASCII(text)), IV), 5, 8);
 }
 
 function numberToBinary(number, length) {
@@ -80,10 +80,15 @@ function numberToBinary(number, length) {
   return binaryCode;
 }
 
-function caesarCipher(text, key) {
+function caesarCipher(text, key, length) {
   let cipherText = [];
   for (let i = 0; i < text.length; i++) {
-    cipherText.push(parseInt(text[i], 2) + parseInt(numberToBinary(key, 8), 2).toString(2));
+    cipherText.push(
+      (parseInt(text[i], 2) + parseInt(numberToBinary(key, 8), 2)).toString(2),
+    );
+    while (cipherText[i].length < length) {
+      cipherText[i] = "0" + cipherText[i];
+    }
   }
   return cipherText;
 }
