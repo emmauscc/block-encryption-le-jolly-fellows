@@ -1,6 +1,6 @@
 import readline from "readline";
 
-let initializationVector = "00000111";
+let initializationVector = randomBinary(8);
 let encryptedText;
 
 let rl = readline.createInterface(process.stdin, process.stdout);
