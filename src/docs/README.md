@@ -4,7 +4,7 @@
 
 1. Set the message variable (string)
     - Or read from command line
-2. Set encryption/decryption key
+2. Set encryption key
 3. Create a random IV (8 bit binary) at runtime
 4. Define other variables to be used in process
 
@@ -29,64 +29,63 @@ Assignee: `JM`
 1. Define `binaryCode` as empty string
     - `let binaryCode = "";`
 2. Loop over code `length` amount of times
-    - `for (let i = 0; i < length; i++){}`
+    - `for (let i = 0; i < length; i++){`
 3. Inside loop add random 1 or 0 to `binaryCode`
     - `binaryCode += Math.floor(Math.random() * 2);`
+    - `}`
 4. Exit loop and return `binaryCode`
     - `return binaryCode;`
 
-## function textToASCII(text)
+## function textToASCII(character)
 
 Assignee: `ID`
 
 - [X] Completed?
 
-1. Define `asciiArray` as empty array
-    - `let asciiArray = [];`
-2. Loop over every character in the message
-    - `for (let i = 0; i < text.length; i++){}`
-3. Inside the loop convert every character to binary
-    - `asciiArray[i] = text.charCodeAt(i);`
-4. Exit loop and return new `asciiArray`
-    - `return asciiArray;`
+1. Convert using charCodeAt and return
+    - `return character.charCodeAt(0);`
 
-## function ASCIIToBinary(text)
+## function ASCIIToBinary(character)
 
 Assignee: `ID`
 
 - [X] Completed?
 
-1. Define `binaryArray` as empty array
-    - `let binaryArray = [];`
-2. Loop over every character in the message
-    - `for (let i = 0; i < text.length; i++) {}`
-3. Add `0` to the front and convert to binary
-    - `binaryArray[i] = "0" + text[i].toString(2);`
-4. Exit loop and return new `binaryArray`
-    - `return binaryArray;`
+1. Convert using toString, add `0` to front and return
+    - `return "0" + character.toString(2);`
 
-## function XORgate(text, IV)
+## function XORgate(character, IV)
 
 Assignee: `JM`
 
 - [X] Completed?
 
-1. Define `XORArray` as empty array
-    - `let XORArray = [];`
-2. Loop over every character in the message
-    - `for (let i = 0; i < text.length; i++) {}`
-3. Define `binaryString` as empty string
+1. Define `binaryString` as empty string
     - `let binaryString = "";`
-4. Loop over every binary character in the message
-    - `for (let j = 0; j < text[i].length; j++) {}`
-5. Use XOR operator with current binary character and matching IV value
-    - `binaryString += text[i][j] ^ IV[j];`
-6. Exit binary character loop, push new `binaryString` to `XORArray`
-    - `XORArray.push(binaryString);`
-7. Use last `binaryString` as the new `IV`
-    - `IV = binaryString;`
-8. Exit character loop and return new `XORArray`
-    - `return XORArray;`
+2. Loop over every character provided
+    - `for (let j = 0; j < character.length; j++) {`
+3. Inside of loop add XOR operator output to end of `binaryString`
+    - `binaryString += character[j] ^ IV[j];`
+    - `}`
+4. Once loop is finished return `binaryString`
+    - `return binaryString`
+
+## function caesarCipher(text, key, length)
+
+Assignee: `ID`
+
+- [X] Completed?
+
+1. Define `cipherText` as empty
+    - `let cipherText;`
+2. Add `text` as integer with `key`, convert back to binary and then set `cipherText` to it
+    - `cipherText = (parseInt(text, 2) + key).toString(2);`
+3. While loop to add `0` to front of cipherText until it's equal to `length`
+    - `while (cipherText.length < length) {`
+    - `cipherText = "0" + cipherText;`
+    - `}`
+4. return cipherText;
+    - `return binaryString`
 
 ## function encryptText(text, IV)
 
@@ -94,26 +93,21 @@ Assignee: `JM`
 
 - [X] Completed?
 
-1. Send text to `textToASCII` function
-    - `textToASCII(text);`
-2. Then send it to the `ASCIIToBinary` function
-    - `ASCIIToBinary(text);`
-3. Finally send to the `XORgate` function
-    - `XORgate(text, IV);`
-4. Return result of the chained functions
-    - `return XORgate(ASCIIToBinary(textToASCII(text)), IV);`
-
-## function numberToBinary(number, length)
-
-Assignee: `JM`
-
-- [X] Completed?
-
-1. Define `binaryCode` as `number`'s binary representation then convert to string
-    - `let binaryCode = (number >>> 0).toString(2);`
-2. Loop for `length` minus initial `binaryCode` length
-    - `for (let i = 0; i < length - (number >>> 0).toString(2).length; i++) {}`
-3. Inside of the loop add `"0"` to the front of `binaryCode`
-    - `binaryCode = "0" + binaryCode;`
-4. Exit loop and return the result `binaryCode`
-    - `return binaryCode;`
+1. Split `text` into array of individual characters and set `encryptedText` to it
+    - `let encryptedText = text.split("");`
+2. Loop over every character of `encryptedText`
+    - `for (let i = 0; i < encryptedText.length; i++) {`
+3. Send character to `textToASCII` and `ASCIIToBinary` then add it to it's place in the array
+    - `encryptedText.splice(i, 1, ASCIIToBinary(textToASCII(encryptedText[i])));`
+4. If using the first character use provided `IV` with `XORgate` function and add to array
+    - `if (i == 0) {`
+    - `encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));`
+    - `}`
+5. If not then use the last character as the IV and then add it to it's place in the array
+    - `else {`
+    - `encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));`
+    - `}`
+6. Send current character to `caesarCipher` with global `encryptionKey` and `bitLength`, add to array
+    - `encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, bitLength));`
+7. Once loop is complete return `encryptedText`
+    - `encryptedText;`

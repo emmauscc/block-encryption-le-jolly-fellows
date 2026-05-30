@@ -1,8 +1,7 @@
 import readline from "readline";
 
-let encryptionKey = 5;
 let bitLength = 8;
-
+let encryptionKey = 5;
 let initializationVector = randomBinary(bitLength);
 
 let rl = readline.createInterface(process.stdin, process.stdout);
@@ -19,15 +18,6 @@ rl.question("What text do you want to encrypt? ", (plainText) => {
 });
 
 // Helper functions
-
-function numberToBinary(number, length) {
-  let binaryCode = (number >>> 0).toString(2);
-  for (let i = 0; i < length - (number >>> 0).toString(2).length; i++) {
-    binaryCode = "0" + binaryCode;
-  }
-  return binaryCode;
-}
-
 function randomBinary(length) {
   let binaryCode = "";
 
@@ -39,7 +29,6 @@ function randomBinary(length) {
 }
 
 // Encryption functions
-
 function textToASCII(character) {
   return character.charCodeAt(0);
 }
@@ -61,9 +50,7 @@ function XORgate(character, IV) {
 function caesarCipher(text, key, length) {
   let cipherText;
 
-  cipherText = (
-    parseInt(text, 2) + parseInt(numberToBinary(key, bitLength), 2)
-  ).toString(2);
+  cipherText = (parseInt(text, 2) + key).toString(2);
   while (cipherText.length < length) {
     cipherText = "0" + cipherText;
   }
@@ -91,7 +78,7 @@ function encryptText(text, IV) {
     console.log("Text after XOR gate:");
     console.log(encryptedText);
 
-    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, 8));
+    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, bitLength));
 
     console.log("Text after cipher:");
     console.log(encryptedText);
