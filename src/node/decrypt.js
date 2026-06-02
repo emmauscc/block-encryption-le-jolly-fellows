@@ -23,7 +23,6 @@ rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
 
           console.log("\n");
 
-          console.log("The decrypted text in binary:");
           decryptText(
             knownInformation[0],
             knownInformation[1],
@@ -37,8 +36,12 @@ rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
   });
 });
 
-function binaryToText(character) {
-  return String.fromCharCode(parseInt(character, 2));
+function binaryToASCII(character) {
+  return parseInt(character, 2);
+}
+
+function ASCIIToText(character) {
+  return String.fromCharCode(character);
 }
 
 function decryptText(text, length, key, IV) {
@@ -65,9 +68,10 @@ function decryptText(text, length, key, IV) {
     }
     console.log("Text after XOR gate:");
     console.log(encryptedText);
+    console.log("\n");
   }
   for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, binaryToText(encryptedText[i]));
+    encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i])));
 
     console.log("Text after converting from binary to text:");
     console.log(encryptedText);
