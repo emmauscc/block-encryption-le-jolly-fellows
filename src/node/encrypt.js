@@ -1,4 +1,5 @@
 import readline from "readline";
+import { XORgate, caesarCipher } from "./common.js";
 
 let bitLength = 8;
 let encryptionKey = 5;
@@ -6,18 +7,17 @@ let initializationVector = randomBinary(bitLength);
 
 let rl = readline.createInterface(process.stdin, process.stdout);
 
-rl.question("What text do you want to encrypt? ", (plainText) => {
-  console.log("Using text: " + plainText);
+rl.question("What text do you want to encrypt? ", (textToEncrypt) => {
+  console.log("Using text: " + textToEncrypt);
 
   console.log("\n");
 
   console.log("The encrypted text in binary:");
-  encryptText(plainText, initializationVector);
+  encryptText(textToEncrypt, initializationVector);
 
   rl.close();
 });
 
-// Helper functions
 function randomBinary(length) {
   let binaryCode = "";
 
@@ -28,33 +28,12 @@ function randomBinary(length) {
   return binaryCode;
 }
 
-// Encryption functions
 function textToASCII(character) {
   return character.charCodeAt(0);
 }
 
 function ASCIIToBinary(character) {
   return "0" + character.toString(2);
-}
-
-function XORgate(character, IV) {
-  let binaryString = "";
-
-  for (let j = 0; j < character.length; j++) {
-    binaryString += character[j] ^ IV[j];
-  }
-
-  return binaryString;
-}
-
-function caesarCipher(text, key, length) {
-  let cipherText;
-
-  cipherText = (parseInt(text, 2) + key).toString(2);
-  while (cipherText.length < length) {
-    cipherText = "0" + cipherText;
-  }
-  return cipherText;
 }
 
 // TODO: Solve issue with binary ticking over to 9 bits
