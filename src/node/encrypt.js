@@ -9,11 +9,14 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 
 rl.question("What text do you want to encrypt? ", (textToEncrypt) => {
   console.log("Using text: " + textToEncrypt);
+  console.log("Using IV: " + initializationVector);
 
   console.log("\n");
 
   console.log("The encrypted text in binary:");
-  encryptText(textToEncrypt, initializationVector);
+  console.log(
+    String(encryptText(textToEncrypt, initializationVector)).replace(/,/g, ""),
+  );
 
   rl.close();
 });
@@ -44,24 +47,13 @@ function encryptText(text, IV) {
   for (let i = 0; i < encryptedText.length; i++) {
     encryptedText.splice(i, 1, ASCIIToBinary(textToASCII(encryptedText[i])));
 
-    console.log("Text in binary:");
-    console.log(encryptedText);
-
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
-      console.log("Using IV: " + IV);
     } else {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
-      console.log("Using IV: " + encryptedText[i - 1]);
     }
-    console.log("Text after XOR gate:");
-    console.log(encryptedText);
 
     encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, bitLength));
-
-    console.log("Text after cipher:");
-    console.log(encryptedText);
-    console.log("\n");
   }
   return encryptedText;
 }

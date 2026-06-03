@@ -1,20 +1,20 @@
-# Overall block encryption process
+# Blockchain encryption
 
 ## Pre-encryption setup
 
-1. Set the message variable (string)
-    - Or read from command line
-2. Set encryption key
-3. Create a random IV (8 bit binary) at runtime
-4. Define other variables to be used in process
+1. Import readline from node.
+2. Import common functions using ES modules.
+3. Define the bit length, the encryption key and initialization vector.
+    - The initialization vector is a random binary with the length of bit length.
 
 ## Encryption process
 
-1. Convert the whole message it's ASCII (hex) representation
-2. Then convert the ASCII output to it's equivalent binary (8 bit) form
-3. Use a XOR gate with pre-defined IV and the binary message's 1st character
-4. Follow cipher encryption process (e.g. caesar) with the pre-defined key on the output of step 3
-5. Repeat steps 3 and 4 on next character with step 4 output as new the IV until all characters have been encrypted
+1. Split text into the individual characters.
+2. Convert the first character it's ASCII form.
+3. Then convert the ASCII to binary form.
+4. Use a XOR gate on each bit in the binary with the predefined initialization vector.
+5. Execute the caesar cipher encryption process with the key defined from before.
+6. Repeat steps 2-5 but with the initialization vector as the last encrypted character.
 
 ---
 

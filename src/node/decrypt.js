@@ -23,11 +23,16 @@ rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
 
           console.log("\n");
 
-          decryptText(
-            knownInformation[0],
-            knownInformation[1],
-            knownInformation[2],
-            knownInformation[3],
+          console.log("The decrypted text in plain text:");
+          console.log(
+            String(
+              decryptText(
+                knownInformation[0],
+                knownInformation[1],
+                knownInformation[2],
+                knownInformation[3],
+              ),
+            ).replace(/,/g, ""),
           );
           rl.close();
         },
@@ -47,34 +52,18 @@ function ASCIIToText(character) {
 function decryptText(text, length, key, IV) {
   let regex = new RegExp(`.{1,${length}}`, "g");
   let encryptedText = text.match(regex);
-  console.log("New encrypted text as array:");
-  console.log(encryptedText);
 
   for (let i = encryptedText.length - 1; i > -1; i--) {
     encryptedText.splice(i, 1, caesarCipher(encryptedText[i], -key, length));
-    console.log("Binary after reverting the caesar cipher:");
-    console.log(encryptedText);
 
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
-      console.log("Using IV: " + IV);
     } else {
-      encryptedText.splice(
-        i,
-        1,
-        XORgate(encryptedText[i], encryptedText[i - 1]),
-      );
-      console.log("Using IV: " + encryptedText[i - 1]);
+      encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
     }
-    console.log("Text after XOR gate:");
-    console.log(encryptedText);
-    console.log("\n");
   }
   for (let i = 0; i < encryptedText.length; i++) {
     encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i])));
-
-    console.log("Text after converting from binary to text:");
-    console.log(encryptedText);
   }
   return encryptedText;
 }
