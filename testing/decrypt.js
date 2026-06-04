@@ -1,40 +1,20 @@
 import readline from "readline";
 import { XORgate, caesarCipher } from "./common.js";
 
-let knownInformation = [];
-
-let rl = readline.createInterface(process.stdin, process.stdout);
-
-rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
-  knownInformation.push(textToDecrypt);
-
+if (process.argv.length == 5) {
+  decryptionProcess(process.argv[2], process.argv[3], process.argv[4]);
+} else {
+  let rl = readline.createInterface(process.stdin, process.stdout);
+  rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
     rl.question("What is the encryption key? ", (encryptionKey) => {
-      knownInformation.push(encryptionKey);
-
-      rl.question(
-        "Finally, what is the initialization vector? ",
-        (initializationVector) => {
-          knownInformation.push(initializationVector);
-          console.log("Decrypting with known provided information:");
-          console.log(knownInformation);
-
-          console.log("\n");
-
-          console.log("The decrypted text in plain text:");
-          console.log(
-            String(
-              decryptText(
-                knownInformation[0],
-                knownInformation[1],
-                knownInformation[2],
-              ),
-            ).replace(/,/g, ""),
-          );
+      rl.question("Finally, what is the initialization vector? ", (initializationVector) => {
+          decryptionProcess(textToDecrypt, encryptionKey, initializationVector);
           rl.close();
         },
       );
     });
-});
+  });
+}
 
 function binaryToASCII(character) {
   return parseInt(character, 2);
@@ -53,11 +33,28 @@ function decryptText(text, key, IV) {
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
     } else {
-      encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
+      encryptedText.splice(
+        i,
+        1,
+        XORgate(encryptedText[i], encryptedText[i - 1]),
+      );
     }
   }
   for (let i = 0; i < encryptedText.length; i++) {
     encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i])));
   }
   return encryptedText;
+}
+
+function decryptionProcess(text, key, IV) {
+  console.log("\n");
+  
+  console.log("Using text: " + text);
+  console.log("Using key: " + key);
+  console.log("Using IV: " + IV);
+
+  console.log("\n");
+
+  console.log("The decrypted text in plain text:");
+  console.log(String(decryptText(text, Number(key), IV)).replace(/,/g, ""));
 }

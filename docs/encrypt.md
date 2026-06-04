@@ -4,8 +4,8 @@
 
 1. Import readline from node.
 2. Import common functions using ES modules.
-3. Define the bit length, the encryption key and initialization vector.
-    - The initialization vector is a random binary with the length of bit length.
+3. Define the encryption key and initialization vector.
+    - The initialization vector is a random binary with the length of 8.
 
 ## Encryption process
 
@@ -70,7 +70,7 @@ Assignee: `JM`
 4. Once loop is finished return `binaryString`
     - `return binaryString`
 
-## function caesarCipher(text, key, length)
+## function caesarCipher(text, key)
 
 Assignee: `ID`
 
@@ -80,8 +80,8 @@ Assignee: `ID`
     - `let cipherText;`
 2. Add `text` as integer with `key`, convert back to binary and then set `cipherText` to it
     - `cipherText = (parseInt(text, 2) + key).toString(2);`
-3. While loop to add `0` to front of cipherText until it's equal to `length`
-    - `while (cipherText.length < length) {`
+3. While loop to add `0` to front of cipherText until it's equal to 8
+    - `while (cipherText.length < 8) {`
     - `cipherText = "0" + cipherText;`
     - `}`
 4. return cipherText;
@@ -107,7 +107,7 @@ Assignee: `JM`
     - `else {`
     - `encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));`
     - `}`
-6. Send current character to `caesarCipher` with global `encryptionKey` and `bitLength`, add to array
-    - `encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, bitLength));`
+6. Send current character to `caesarCipher` with global `encryptionKey` and 8, add to array
+    - `encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, 8));`
 7. Once loop is complete return `encryptedText`
     - `encryptedText;`
