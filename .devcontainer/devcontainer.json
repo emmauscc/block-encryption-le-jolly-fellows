@@ -9,7 +9,9 @@
 				"DavidAnson.vscode-markdownlint",
 				"streetsidesoftware.code-spell-checker",
 				"esbenp.prettier-vscode",
-				"wayou.vscode-todo-highlight"
+				"wayou.vscode-todo-highlight",
+				"tauri-apps.tauri-vscode",
+				"rust-lang.rust-analyzer"
 			]
 		}
 	}

@@ -1,23 +1,13 @@
 {
   "name": "block-encryption",
+  "private": true,
   "version": "1.0.0",
-  "description": "A simple project to implement block encryption with JavaScript",
-  "homepage": "https://github.com/emmauscc/block-encryption-le-jolly-fellows#readme",
-  "bugs": {
-    "url": "https://github.com/emmauscc/block-encryption-le-jolly-fellows/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/emmauscc/block-encryption-le-jolly-fellows.git"
-  },
-  "license": "ISC",
-  "author": "JM & ID",
   "type": "module",
-  "main": "src/node/encrypt.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tauri": "tauri"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2",
     "@eslint/css": "^1.3.0",
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^2.0.0",

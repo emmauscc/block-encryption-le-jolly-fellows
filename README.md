@@ -4,7 +4,7 @@ A simple project to implement block encryption with JavaScript.
 
 ## Project layout
 
-The source code is found in the `src/` folder which is further split into `node/` and `web/` for CLI and web respectively. Currently the `src/web/` folder just holds placeholder code but the `src/node/` folder holds `common.js`, `decrypt.js` and `encrypt.js`.
+The source code for past testing can be found in the `testing/` folder with a focus on CLI use. The web version can be found in `src/` and only currently holds basic boiler plate code. For desktop, the relevant code is in `src-tauri/`. The `testing/` folder holds `common.js`, `decrypt.js` and `encrypt.js`.
 
 `common.js` has the functions that are shared for both the encryption process and the decryption process. The exported functions are `XORgate(character, IV)` and `caesarCipher(text, key, length)`.
 
