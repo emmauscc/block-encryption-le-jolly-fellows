@@ -1,24 +1,25 @@
 import readline from "readline";
 import { XORgate, caesarCipher } from "./common.js";
 
-let bitLength = 8;
-let encryptionKey = 5;
-let initializationVector = randomBinary(bitLength);
+let initializationVector = randomBinary(8);
 
 let rl = readline.createInterface(process.stdin, process.stdout);
 
 rl.question("What text do you want to encrypt? ", (textToEncrypt) => {
-  console.log("Using text: " + textToEncrypt);
-  console.log("Using IV: " + initializationVector);
+  rl.question("What is your encryption key? ", (encryptionKey) => {
+    console.log("Using text: " + textToEncrypt);
+    console.log("Using IV: " + initializationVector);
+    console.log("Using key: " + encryptionKey);
 
-  console.log("\n");
+    console.log("\n");
 
-  console.log("The encrypted text in binary:");
-  console.log(
-    String(encryptText(textToEncrypt, initializationVector)).replace(/,/g, ""),
-  );
+    console.log("The encrypted text in binary:");
+    console.log(
+      String(encryptText(textToEncrypt, initializationVector, Number(encryptionKey))).replace(/,/g, ""),
+    );
 
-  rl.close();
+    rl.close();
+  });
 });
 
 function randomBinary(length) {
@@ -41,7 +42,7 @@ function ASCIIToBinary(character) {
 
 // TODO: Solve issue with binary ticking over to 9 bits
 // TODO: Research if code is consistent over multiple hand tests
-function encryptText(text, IV) {
+function encryptText(text, IV, key) {
   let encryptedText = text.split("");
 
   for (let i = 0; i < encryptedText.length; i++) {
@@ -53,7 +54,7 @@ function encryptText(text, IV) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
     }
 
-    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, bitLength));
+    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], key, 8));
   }
   return encryptedText;
 }

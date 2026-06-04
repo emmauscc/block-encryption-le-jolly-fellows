@@ -8,9 +8,6 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
   knownInformation.push(textToDecrypt);
 
-  rl.question("What is the bit length? ", (bitLength) => {
-    knownInformation.push(bitLength);
-
     rl.question("What is the encryption key? ", (encryptionKey) => {
       knownInformation.push(encryptionKey);
 
@@ -30,7 +27,6 @@ rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
                 knownInformation[0],
                 knownInformation[1],
                 knownInformation[2],
-                knownInformation[3],
               ),
             ).replace(/,/g, ""),
           );
@@ -38,7 +34,6 @@ rl.question("What text do you want to decrypt? ", (textToDecrypt) => {
         },
       );
     });
-  });
 });
 
 function binaryToASCII(character) {
@@ -49,12 +44,11 @@ function ASCIIToText(character) {
   return String.fromCharCode(character);
 }
 
-function decryptText(text, length, key, IV) {
-  let regex = new RegExp(`.{1,${length}}`, "g");
-  let encryptedText = text.match(regex);
+function decryptText(text, key, IV) {
+  let encryptedText = text.match(/.{1,8}/g);
 
   for (let i = encryptedText.length - 1; i > -1; i--) {
-    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], -key, length));
+    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], -key, 8));
 
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));

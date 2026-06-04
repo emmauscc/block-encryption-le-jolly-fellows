@@ -8,11 +8,11 @@ export function XORgate(character, IV) {
   return binaryString;
 }
 
-export function caesarCipher(text, key, length) {
+export function caesarCipher(text, key) {
   let cipherText;
 
   cipherText = (parseInt(text, 2) + key).toString(2);
-  while (cipherText.length < length) {
+  while (cipherText.length < 8) {
     cipherText = "0" + cipherText;
   }
   return cipherText;
