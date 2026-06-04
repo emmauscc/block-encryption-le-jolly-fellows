@@ -30,6 +30,10 @@ function encryptText(text, key, IV) {
   for (let i = 0; i < encryptedText.length; i++) {
     encryptedText.splice(i, 1, "0" + encryptedText[i].charCodeAt(0).toString(2));
 
+  while (encryptedText[i].length < 8) {
+    encryptedText[i] = "0" + encryptedText[i];
+  }
+
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
     } else {
