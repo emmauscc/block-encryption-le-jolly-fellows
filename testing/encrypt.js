@@ -23,20 +23,12 @@ function randomBinary(length) {
   return binaryCode;
 }
 
-function textToASCII(character) {
-  return character.charCodeAt(0);
-}
-
-function ASCIIToBinary(character) {
-  return "0" + character.toString(2);
-}
-
 // TODO: Research if code is consistent over multiple hand tests
 function encryptText(text, key, IV) {
   let encryptedText = text.split("");
 
   for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, ASCIIToBinary(textToASCII(encryptedText[i])));
+    encryptedText.splice(i, 1, "0" + encryptedText[i].charCodeAt(0).toString(2));
 
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
