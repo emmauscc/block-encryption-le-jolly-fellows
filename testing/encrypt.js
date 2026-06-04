@@ -14,9 +14,9 @@ if (process.argv.length == 4) {
 }
 
 function randomBinary(length) {
-  let binaryCode = "";
+  let binaryCode = "0";
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length - 1; i++) {
     binaryCode += Math.floor(Math.random() * 2);
   }
 
@@ -31,7 +31,6 @@ function ASCIIToBinary(character) {
   return "0" + character.toString(2);
 }
 
-// TODO: Solve issue with binary ticking over to 9 bits (still happening)
 // TODO: Research if code is consistent over multiple hand tests
 function encryptText(text, key, IV) {
   let encryptedText = text.split("");
