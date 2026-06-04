@@ -53,6 +53,10 @@ h1 {
   text-align: center;
 }
 
+input:hover {
+  border-color: #396cd8;
+}
+
 input,
 button {
   border-radius: 8px;
