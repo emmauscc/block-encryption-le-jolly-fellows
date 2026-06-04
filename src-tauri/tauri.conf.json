@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "block-encryption",
+  "productName": "Block Encryptor",
   "version": "0.1.0",
-  "identifier": "com.ljf.block-encryption",
+  "identifier": "com.ljf.block-encryptor",
   "build": {
     "frontendDist": "../src"
   },
@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "block-encryption",
+        "title": "Block Encryptor",
         "width": 800,
         "height": 600
       }
