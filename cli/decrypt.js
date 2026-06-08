@@ -16,14 +16,6 @@ if (process.argv.length == 5) {
   });
 }
 
-function binaryToASCII(character) {
-  return parseInt(character, 2);
-}
-
-function ASCIIToText(character) {
-  return String.fromCharCode(character);
-}
-
 function decryptText(text, key, IV) {
   let encryptedText = text.match(/.{1,8}/g);
 
@@ -33,20 +25,17 @@ function decryptText(text, key, IV) {
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
     } else {
-      encryptedText.splice(
-        i,
-        1,
-        XORgate(encryptedText[i], encryptedText[i - 1]),
-      );
+      encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
     }
   }
   for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i])));
+    encryptedText.splice(i, 1, String.fromCharCode(parseInt(encryptedText[i], 2)));
   }
   return encryptedText;
 }
 
 function decryptionProcess(text, key, IV) {
+  key = Number.parseInt(key);
   console.log("\n");
   
   console.log("Using text: " + text);
@@ -56,5 +45,5 @@ function decryptionProcess(text, key, IV) {
   console.log("\n");
 
   console.log("The decrypted text in plain text:");
-  console.log(String(decryptText(text, Number(key), IV)).replace(/,/g, ""));
+  console.log(String(decryptText(text, key, IV)).replace(/,/g, ""));
 }

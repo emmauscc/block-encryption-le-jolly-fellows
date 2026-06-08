@@ -14,7 +14,7 @@ if (process.argv.length == 4) {
 }
 
 function randomBinary(length) {
-  let binaryCode = "0";
+  let binaryCode = "01";
 
   for (let i = 0; i < length - 1; i++) {
     binaryCode += Math.floor(Math.random() * 2);
@@ -28,11 +28,11 @@ function encryptText(text, key, IV) {
   let encryptedText = text.split("");
 
   for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, "0" + encryptedText[i].charCodeAt(0).toString(2));
+    encryptedText.splice(i, 1, encryptedText[i].charCodeAt(0).toString(2));
 
-  while (encryptedText[i].length < 8) {
-    encryptedText[i] = "0" + encryptedText[i];
-  }
+    while (encryptedText[i].length < 8) {
+      encryptedText[i] = "0" + encryptedText[i];
+    }
 
     if (i == 0) {
       encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
@@ -46,8 +46,10 @@ function encryptText(text, key, IV) {
 }
 
 function encryptionProcess(text, key, IV) {
-  if (Number(key) >= 128) {
-    throw new Error("Encryption key too high! Please keep it lower than 128");
+  key = Number.parseInt(key);
+
+  if (key > 64 || key <= 0) {
+    throw new Error("Encryption key too high or negative! Please keep it lower than or equal to 64");
   }
 
   console.log("\n");
@@ -59,5 +61,5 @@ function encryptionProcess(text, key, IV) {
   console.log("\n");
 
   console.log("The encrypted text in binary:");
-  console.log(String(encryptText(text, Number(key), IV)).replace(/,/g, ""));
+  console.log(String(encryptText(text, key, IV)).replace(/,/g, ""));
 }
