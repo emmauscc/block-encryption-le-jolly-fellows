@@ -8,6 +8,28 @@ export function XORgate(character, IV) {
   return binaryString;
 }
 
+
+export function textToASCII(character) {
+  return character.charCodeAt(0);
+}
+
+export function ASCIIToBinary(character) {
+  character = character.toString(2);
+
+  while (character.length < 8) {
+    character = "0" + character; 
+  }
+  return character;
+}
+
+export function binaryToASCII(character) {
+  return parseInt(character, 2);
+}
+
+export function ASCIIToText(character) {
+  return String.fromCharCode(character);
+}
+
 export function caesarCipher(text, key) {
   let cipherText;
 
@@ -18,7 +40,7 @@ export function caesarCipher(text, key) {
   return cipherText;
 }
 
-export function vigenereCipher(text, key) {
+export function vigenereCipher(text, key, operation) {
   let counter = 0;
   let result = "";
   let keyValues = [];
@@ -29,8 +51,13 @@ export function vigenereCipher(text, key) {
   
   for (let i = 0; i < text.length; i++) {
     let character = text[i];
+    let utf = text.charCodeAt(i);
     if (/[A-Z]/.test(character)) {
-      let utf = text.charCodeAt(i) + keyValues[counter % key.length];
+      if (operation == 1) {
+        utf += keyValues[counter % key.length];
+      } else if (operation == 0){
+        utf -= keyValues[counter % key.length];
+      }
       
       while(utf > 90){
         utf -= 26
