@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Block Encryptor</title>
-    <script type="module" src="./main.js" defer></script>
+    <script src="./scripts/encrypt.js"></script>
+    <script src="./scripts/common.js"></script>
   </head>
 
   <body>
@@ -15,11 +16,11 @@
       <div class="row">
         <img src="./assets/block-encryptor.svg" class="logo block-encryptor" alt="Block Encryptor logo" />
       </div>
-      <p>Here is some sample text to brighten up your day</p>
+      <p id="header">Input your text that you wish to encrypt below.</p>
 
       <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
+        <input id="greet-input" placeholder="Text..." />
+        <button onClick="getInfo()" type="submit">Greet</button>
       </form>
       <p id="greet-msg"></p>
     </main>
