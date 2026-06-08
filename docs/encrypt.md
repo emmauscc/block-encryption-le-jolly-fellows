@@ -1,3 +1,5 @@
+# **THIS IS CURRENTLY OUTDATED**
+
 # Blockchain encryption
 
 ## Pre-encryption setup

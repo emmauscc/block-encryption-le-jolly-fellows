@@ -1,10 +1,13 @@
 import readline from "readline";
-import { XORgate, textToASCII, ASCIIToBinary, binaryToASCII, ASCIIToText, caesarCipher, vigenereCipher } from "./common.js";
+import { XORgate, caesarCipher, vigenereCipher } from "./common.js";
 
 if (process.argv.length == 6) {
   if (process.argv[5].toLowerCase() == "c" || process.argv[5].toLowerCase() == "caesar") {
     decryptionProcess(process.argv[2], process.argv[3], process.argv[4], "caesar");
   } else if (process.argv[5].toLowerCase() == "v" || process.argv[5].toLowerCase() == "vigenere") {
+    console.log("\n");
+    console.warn("Warning! Vigenere cipher only operates on letters!");
+    console.warn("Warning! Vigenere cipher will convert lower case to upper case!");
     decryptionProcess(process.argv[2], process.argv[3], process.argv[4], "vigenere");
   } else {
     throw new Error("Unknown cipher method: " + process.argv[4]);
@@ -19,7 +22,10 @@ if (process.argv.length == 6) {
           if (cipherMethod.toLowerCase() == "c" || cipherMethod.toLowerCase() == "caesar") {
             decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "caesar");
           } else if (cipherMethod.toLowerCase() == "v" || cipherMethod.toLowerCase() == "vigenere") {
-            decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "vigenere",);
+            console.log("\n");
+            console.warn("Warning! Vigenere cipher only operates on letters!");
+            console.warn("Warning! Vigenere cipher will convert lower case to upper case!");
+            decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "vigenere");
           } else {
             throw new Error("Unknown cipher method: " + cipherMethod);
           }
@@ -31,35 +37,27 @@ if (process.argv.length == 6) {
 }
 
 function decryptText(text, key, IV, cipher) {
-  let encryptedText = text.match(/.{1,8}/g);
+  text = text.match(/.{1,8}/g);
 
-  if (cipher == "vigenere") {
-    for (let i = 0; i < encryptedText.length; i++) { 
-      encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i]))); 
-    }
-    encryptedText = vigenereCipher(encryptedText.join(""), key, 0).split("");
-    
-    for (let i = 0; i < encryptedText.length; i++) {
-      encryptedText.splice(i, 1, ASCIIToBinary(textToASCII(encryptedText[i])));
-    }
-  }
-
-  for (let i = encryptedText.length - 1; i > -1; i--) {
+  for (let i = text.length - 1; i > -1; i--) {
     if (cipher == "caesar") {
-      encryptedText.splice(i, 1, caesarCipher(encryptedText[i], -key, 8));
+      text.splice(i, 1, caesarCipher(text[i], -key, 8));
     }
 
     if (i == 0) {
-      encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
+      text.splice(i, 1, XORgate(text[i], IV));
     } else {
-      encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
+      text.splice(i, 1, XORgate(text[i], text[i - 1]));
     }
   }
 
-  for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, ASCIIToText(binaryToASCII(encryptedText[i])));
+  for (let i = 0; i < text.length; i++) {
+    text.splice(i, 1, String.fromCharCode(parseInt(text[i], 2)));
   }
-  return encryptedText;
+  if (cipher == "vigenere"){
+    text = vigenereCipher(text.join(""), key, 0).split("");
+  }
+  return text;
 }
 
 function decryptionProcess(text, key, IV, cipher) {
