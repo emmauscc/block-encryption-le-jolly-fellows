@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Block Encryptor</title>
-    <script src="./scripts/common.js"></script>
-    <script src="./scripts/decrypt.js"></script>
-    <script src="./scripts/encrypt.js"></script>
+    <script type="module" src="./scripts/common.js"></script>
+    <script type="module" src="./scripts/decrypt.js"></script>
+    <script type="module" src="./scripts/encrypt.js"></script>
   </head>
 
   <body>
@@ -15,14 +15,34 @@
       <h1>Welcome to Block Encryptor</h1>
 
       <div class="row">
-        <img src="./assets/block-encryptor.svg" class="logo block-encryptor" alt="Block Encryptor logo" />
+        <img
+          src="./assets/block-encryptor.svg"
+          class="logo block-encryptor"
+          alt="Block Encryptor logo"
+        />
       </div>
       <p id="header">Input your text that you wish to encrypt below.</p>
 
       <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Text..." />
-        <button onClick="getInfo()" type="submit">Greet</button>
+        <input id="text-input" placeholder="Text to Encrypt..." />
       </form>
+      </br>
+      <form class="row" id="greet-form">
+        <input id="iv-input" placeholder="Encryption Key (0-127)..." />
+      </form>
+       <form class="row" id="greet-form">
+        <select>
+          <option>Cesar Cipher</option>
+            <option>Vigenere Cipher</option>
+        </select>
+       </form>
+      </br>
+      <form class="row" id="greet-form">
+        <button type="button" onclick="getInfo()">Encrypt</button>
+        <button type="button" onclick="getInfo()">Decrypt</button>
+      </form>
+
+      <p id="greet-msg"></p>
       <p id="greet-msg"></p>
     </main>
   </body>

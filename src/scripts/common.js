@@ -1,4 +1,4 @@
-export function XORgate(character, IV) {
+window.XORgate = function(character, IV) {
   let binaryString = "";
 
   for (let j = 0; j < character.length; j++) {
@@ -8,7 +8,7 @@ export function XORgate(character, IV) {
   return binaryString;
 }
 
-export function caesarCipher(text, key) {
+window.caesarCipher = function(text, key) {
   let cipherText;
 
   cipherText = (parseInt(text, 2) + key).toString(2);
@@ -18,7 +18,7 @@ export function caesarCipher(text, key) {
   return cipherText;
 }
 
-export function vigenereCipher(text, key) {
+window.vigenereCipher = function(text, key) {
   let counter = 0;
   let result = "";
   let keyValues = [];

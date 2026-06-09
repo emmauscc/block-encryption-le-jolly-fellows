@@ -1,22 +1,20 @@
 /* eslint-disable */
-let textToEncrypt = ''
-let encryptionKey = ''
-
+let textToEncrypt = "";
+let encryptionKey = "";
+// document.getElementById("iv-input").style.display = "none";
 console.log("test");
-
-window.getInfo = function(){
-textToEncrypt = document.getElementById("text-input").value
-encryptionKey = document.getElementById("iv-input").value
-console.log(textToEncrypt)
-console.log(encryptionKey)
-encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8));
-
-
+window.getInfo = function () {
+  textToEncrypt = document.getElementById("text-input").value;
+  encryptionKey = document.getElementById("iv-input").value;
+  console.log(textToEncrypt);
+  console.log(encryptionKey);
+if(){
+ encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8), "caesar");
+}else{
+   encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8), "vigenere");
 }
-
-
-
-
+  
+};
 function randomBinary(length) {
   let binaryCode = "0";
 
@@ -26,42 +24,59 @@ function randomBinary(length) {
 
   return binaryCode;
 }
-
-// TODO: Research if code is consistent over multiple hand tests
-function encryptText(text, key, IV) {
-  let encryptedText = text.split("");
-
-  for (let i = 0; i < encryptedText.length; i++) {
-    encryptedText.splice(i, 1, "0" + encryptedText[i].charCodeAt(0).toString(2));
-
-  while (encryptedText[i].length < 8) {
-    encryptedText[i] = "0" + encryptedText[i];
+function encryptText(text, key, IV, cipher) {
+  if (cipher == "caesar") {
+    text = text.split("");
+  } else if (cipher == "vigenere"){
+    text = vigenereCipher(text.toUpperCase(), key, 1).split("");
   }
+
+  for (let i = 0; i < text.length; i++) {
+    text.splice(i, 1, ASCIIToBinary(textToASCII(text[i])));
 
     if (i == 0) {
-      encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));
+      text.splice(i, 1, XORgate(text[i], IV));
     } else {
-      encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));
+      text.splice(i, 1, XORgate(text[i], text[i - 1]));
     }
 
-    encryptedText.splice(i, 1, caesarCipher(encryptedText[i], key, 8));
+    if (cipher == "caesar") {
+      text.splice(i, 1, caesarCipher(text[i], key, 8));
+    }
   }
-  return encryptedText;
+  return text;
 }
 
-function encryptionProcess(text, key, IV) {
-  if (Number(key) >= 128) {
-    throw new Error("Encryption key too high! Please keep it lower than 128");
-  }
-
-  console.log("\n");
-
+function encryptionProcess(text, key, IV, cipher) {
+  console.log("\n" + "Using cipher: " + cipher);
   console.log("Using text: " + text);
   console.log("Using key: " + key);
   console.log("Using IV: " + IV);
 
+  if (cipher == "caesar") {
+    if (key > 64 || key <= 0) {
+      throw new Error("Encryption key too high or negative! Please keep it lower than or equal to 64");
+    }
+    console.log("\n");
+    console.log("The encrypted text in binary:");
+    console.log(String(encryptText(text, parseInt(key), IV, cipher)).replace(/,/g, ""));
+  } else if (cipher == "vigenere") {
+    console.log("\n");
+    console.log("The encrypted text in binary:");
+    console.log(String(encryptText(text, key, IV, cipher)).replace(/,/g, ""));
+  }
   console.log("\n");
+}
 
-  console.log("The encrypted text in binary:");
-  console.log(String(encryptText(text, Number(key), IV)).replace(/,/g, ""));
+function textToASCII(character) {
+  return character.charCodeAt(0);
+}
+
+function ASCIIToBinary(character) {
+  character = character.toString(2);
+
+  while (character.length < 8) {
+    character = "0" + character; 
+  }
+  return character;
 }
