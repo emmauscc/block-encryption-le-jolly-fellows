@@ -4,17 +4,18 @@ let encryptionKey = ''
 
 console.log("test");
 
-function getInfo(){
-  let i = 0
-  i++
-  if(i==1){
-    textToEncrypt = document.getElementById("greet-input").text
-    document.getElementsById("header").text = "Input your Encryption Key below."
-    console.log('hello')
-  }
+window.getInfo = function(){
+textToEncrypt = document.getElementById("text-input").value
+encryptionKey = document.getElementById("iv-input").value
+console.log(textToEncrypt)
+console.log(encryptionKey)
+encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8));
+
+
 }
 
-encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8));
+
+
 
 function randomBinary(length) {
   let binaryCode = "0";
