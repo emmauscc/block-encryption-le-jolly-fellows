@@ -1,29 +1,31 @@
 /* eslint-disable */
-let textToEncrypt = "";
-let encryptionKey = "";
-// document.getElementById("iv-input").style.display = "none";
-console.log("test");
-window.getInfo = function () {
-  textToEncrypt = document.getElementById("text-input").value;
-  encryptionKey = document.getElementById("iv-input").value;
-  console.log(textToEncrypt);
-  console.log(encryptionKey);
-if(){
- encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8), "caesar");
-}else{
-   encryptionProcess(textToEncrypt, encryptionKey, randomBinary(8), "vigenere");
-}
-  
-};
-function randomBinary(length) {
-  let binaryCode = "0";
 
-  for (let i = 0; i < length - 1; i++) {
+// encryptionProcess(textToEncrypt, encryptionKey, initializationVector, "vigenere");
+
+function randomBinary(length) {
+  let binaryCode = "01";
+
+  for (let i = 0; i < length - 2; i++) {
     binaryCode += Math.floor(Math.random() * 2);
   }
 
   return binaryCode;
 }
+
+function textToASCII(character) {
+  return character.charCodeAt(0);
+}
+
+function ASCIIToBinary(character) {
+  character = character.toString(2);
+
+  while (character.length < 8) {
+    character = "0" + character; 
+  }
+  return character;
+}
+
+// TODO: Research if code is consistent over multiple hand tests
 function encryptText(text, key, IV, cipher) {
   if (cipher == "caesar") {
     text = text.split("");
@@ -66,17 +68,4 @@ function encryptionProcess(text, key, IV, cipher) {
     console.log(String(encryptText(text, key, IV, cipher)).replace(/,/g, ""));
   }
   console.log("\n");
-}
-
-function textToASCII(character) {
-  return character.charCodeAt(0);
-}
-
-function ASCIIToBinary(character) {
-  character = character.toString(2);
-
-  while (character.length < 8) {
-    character = "0" + character; 
-  }
-  return character;
 }

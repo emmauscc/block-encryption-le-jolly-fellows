@@ -1,4 +1,6 @@
-window.XORgate = function(character, IV) {
+/* eslint-disable */
+
+function XORgate(character, IV) {
   let binaryString = "";
 
   for (let j = 0; j < character.length; j++) {
@@ -8,17 +10,16 @@ window.XORgate = function(character, IV) {
   return binaryString;
 }
 
-window.caesarCipher = function(text, key) {
-  let cipherText;
-
-  cipherText = (parseInt(text, 2) + key).toString(2);
-  while (cipherText.length < 8) {
-    cipherText = "0" + cipherText;
+function caesarCipher(text, key) {
+  text = (parseInt(text, 2) + key).toString(2);
+  
+  while (text.length < 8) {
+    text = "0" + text;
   }
-  return cipherText;
+  return text;
 }
 
-window.vigenereCipher = function(text, key) {
+function vigenereCipher(text, key, operation) {
   let counter = 0;
   let result = "";
   let keyValues = [];
@@ -29,8 +30,13 @@ window.vigenereCipher = function(text, key) {
   
   for (let i = 0; i < text.length; i++) {
     let character = text[i];
+    let utf = text.charCodeAt(i);
     if (/[A-Z]/.test(character)) {
-      let utf = text.charCodeAt(i) + keyValues[counter % key.length];
+      if (operation == 1) {
+        utf += keyValues[counter % key.length];
+      } else if (operation == 0){
+        utf -= keyValues[counter % key.length];
+      }
       
       while(utf > 90){
         utf -= 26

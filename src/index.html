@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Block Encryptor</title>
-    <script type="module" src="./scripts/common.js"></script>
-    <script type="module" src="./scripts/decrypt.js"></script>
-    <script type="module" src="./scripts/encrypt.js"></script>
+
+    <script src="./scripts/common.js" type="text/javascript"></script>
+    <script src="./scripts/decrypt.js" type="text/javascript"></script>
+    <script src="./scripts/encrypt.js" type="text/javascript"></script>
+    <script src="./scripts/main.js" type="text/javascript"></script>
   </head>
 
   <body>
@@ -21,25 +24,31 @@
           alt="Block Encryptor logo"
         />
       </div>
+
       <p id="header">Input your text that you wish to encrypt below.</p>
 
       <form class="row" id="greet-form">
         <input id="text-input" placeholder="Text to Encrypt..." />
       </form>
-      </br>
+
       <form class="row" id="greet-form">
-        <input id="iv-input" placeholder="Encryption Key (0-127)..." />
+        <input id="key-input" placeholder="Encryption Key (0-127)..." />
       </form>
-       <form class="row" id="greet-form">
+
+      <form class="row" id="greet-form">
+        <input id="iv-input" placeholder="Initialization vector..." />
+      </form>
+
+      <form class="row" id="greet-form">
         <select>
           <option>Cesar Cipher</option>
-            <option>Vigenere Cipher</option>
+          <option>Vigenere Cipher</option>
         </select>
-       </form>
-      </br>
+      </form>
+
       <form class="row" id="greet-form">
-        <button type="button" onclick="getInfo()">Encrypt</button>
-        <button type="button" onclick="getInfo()">Decrypt</button>
+        <button type="button" onclick="encryptInput()">Encrypt</button>
+        <button type="button" onclick="decryptInput()">Decrypt</button>
       </form>
 
       <p id="greet-msg"></p>
