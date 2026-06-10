@@ -26,7 +26,7 @@ flowchart TD;
     A --> |Key provided| D;
 
     B[01010011] -->|Through XOR gate| P;
-    C[Cat] --> |Split text into charcters| E;
+    C[Cat] --> |Split text into characters| E;
     D[6] -->|Through caesar cipher| S;
     D -->|Through caesar cipher| T;
     D -->|Through caesar cipher| U;
