@@ -54,6 +54,8 @@ function encryptionProcess(text, key, IV, cipher) {
   console.log("Using text: " + text);
   console.log("Using key: " + key);
   console.log("Using IV: " + IV);
+  document.getElementById("iv-input").value = IV
+  document.getElementById("text-input").value = String(encryptText(text, key, IV, cipher)).replace(/,/g, "")
 
   if (cipher == "caesar") {
     if (key > 64 || key <= 0) {

@@ -27,7 +27,7 @@
 
       <p id="header">Input your text that you wish to encrypt below.</p>
 
-      <form class="row" id="greet-form">
+      <form class="row" id="text-input">
         <input id="text-input" placeholder="Text to Encrypt..." />
       </form>
 
@@ -35,14 +35,14 @@
         <input id="key-input" placeholder="Encryption Key (0-127)..." />
       </form>
 
-      <form class="row" id="greet-form">
+      <form class="row">
         <input id="iv-input" placeholder="Initialization vector..." />
       </form>
 
-      <form class="row" id="greet-form">
-        <select>
-          <option>Cesar Cipher</option>
-          <option>Vigenere Cipher</option>
+      <form class="row">
+        <select id="dropdown">
+          <option value="Caesar">Caesar Cipher</option>
+          <option value="Vigenere">Vigenere Cipher</option>
         </select>
       </form>
 
