@@ -1,7 +1,5 @@
 /* eslint-disable */
 
-// encryptionProcess(textToEncrypt, encryptionKey, initializationVector, "vigenere");
-
 function randomBinary(length) {
   let binaryCode = "01";
 
@@ -50,24 +48,21 @@ function encryptText(text, key, IV, cipher) {
 }
 
 function encryptionProcess(text, key, IV, cipher) {
-  console.log("\n" + "Using cipher: " + cipher);
-  console.log("Using text: " + text);
-  console.log("Using key: " + key);
-  console.log("Using IV: " + IV);
-  document.getElementById("iv-input").value = IV
-  document.getElementById("text-input").value = String(encryptText(text, key, IV, cipher)).replace(/,/g, "")
+  document.getElementById("output").innerHTML = "Using IV: " + IV;
 
   if (cipher == "caesar") {
     if (key > 64 || key <= 0) {
-      throw new Error("Encryption key too high or negative! Please keep it lower than or equal to 64");
+      document.getElementById("output").innerHTML = "<br>" + "Encryption key too high or negative! Please keep it lower than or equal to 64";
+      return;
     }
-    console.log("\n");
-    console.log("The encrypted text in binary:");
-    console.log(String(encryptText(text, parseInt(key), IV, cipher)).replace(/,/g, ""));
+    document.getElementById("output").innerHTML += "<br>";
+
+    document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
+    document.getElementById("output").innerHTML += "<br>" + String(encryptText(text, parseInt(key), IV, cipher)).replace(/,/g, "");
   } else if (cipher == "vigenere") {
-    console.log("\n");
-    console.log("The encrypted text in binary:");
-    console.log(String(encryptText(text, key, IV, cipher)).replace(/,/g, ""));
+    document.getElementById("output").innerHTML += "<br>";
+    
+    document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
+    document.getElementById("output").innerHTML += "<br>" + String(encryptText(text, key, IV, cipher)).replace(/,/g, "");
   }
-  console.log("\n");
 }

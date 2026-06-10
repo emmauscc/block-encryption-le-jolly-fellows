@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
 
     <title>Block Encryptor</title>
 
@@ -25,34 +26,43 @@
         />
       </div>
 
-      <p id="header">Input your text that you wish to encrypt below.</p>
+      <p>Input your text that you wish to encrypt or decrypt below.</p>
 
-      <form class="row" id="text-input">
-        <input id="text-input" placeholder="Text to Encrypt..." />
+      <form class="row" onSubmit="return false;">
+        <input id="text-input" onblur="displayCipherDropdown()" placeholder="Text to use..." />
       </form>
 
-      <form class="row" id="greet-form">
-        <input id="key-input" placeholder="Encryption Key (0-127)..." />
-      </form>
-
-      <form class="row">
-        <input id="iv-input" placeholder="Initialization vector..." />
-      </form>
-
-      <form class="row">
-        <select id="dropdown">
-          <option value="Caesar">Caesar Cipher</option>
-          <option value="Vigenere">Vigenere Cipher</option>
+      <form class="row" onSubmit="return false;">
+        <select id="cipherDropdown">
+          <option value="caesar">Caesar Cipher</option>
+          <option value="vigenere">Vigenere Cipher</option>
         </select>
       </form>
 
-      <form class="row" id="greet-form">
-        <button type="button" onclick="encryptInput()">Encrypt</button>
-        <button type="button" onclick="decryptInput()">Decrypt</button>
+      <form class="row" onSubmit="return false;">
+        <input id="key-input" oninput="displayModeDropdown()" placeholder="Encryption Key..." />
       </form>
 
-      <p id="greet-msg"></p>
-      <p id="greet-msg"></p>
+      <form class="row" onSubmit="return false;">
+        <select id="modeDropdown" onchange="displayIVText()">
+          <option value="encrypt">Encryption</option>
+          <option value="decrypt">Decryption</option>
+        </select>
+      </form>
+
+      <form class="row" onSubmit="return false;">
+        <input id="iv-input" placeholder="Initialization vector..." />
+      </form>
+
+      <form class="row" onSubmit="return false;">
+        <button type="button" id="runButton" onclick="workInput()">Run!</button>
+      </form>
+
+      <h1>Output</h1>
+
+      <form class="row" onSubmit="return false;">
+        <div id="output">Waiting for either encryption or decryption...</div>
+      </form>
     </main>
   </body>
 </html>

@@ -1,8 +1,5 @@
 /* eslint-disable */
 
-// decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "caesar");
-// decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "vigenere");
-
 function decryptText(text, key, IV, cipher) {
   text = text.match(/.{1,8}/g);
 
@@ -28,20 +25,17 @@ function decryptText(text, key, IV, cipher) {
 }
 
 function decryptionProcess(text, key, IV, cipher) {
-  console.log("\n" + "Using cipher: " + cipher);
-  console.log("Using text: " + text);
-  console.log("Using key: " + key);
-  console.log("Using IV: " + IV);
+  document.getElementById("output").innerHTML = "Using IV: " + IV;
 
   if (cipher == "caesar") {
-    console.log("\n");
-    console.log("The decrypted text in plain text:");
-    console.log(String(decryptText(text, parseInt(key), IV, cipher)).replace(/,/g, ""));
-  } else if (cipher == "vigenere") {
-    console.log("\n");
-    console.log("The decrypted text in plain text:");
-    console.log(String(decryptText(text, key, IV, cipher)).replace(/,/g, ""));
-  }
+    document.getElementById("output").innerHTML += "<br>";
 
-  console.log("\n");
+    document.getElementById("output").innerHTML += "<br>" + "The decrypted text in plain text:";
+    document.getElementById("output").innerHTML += "<br>" + String(decryptText(text, parseInt(key), IV, cipher)).replace(/,/g, "");
+  } else if (cipher == "vigenere") {
+    document.getElementById("output").innerHTML += "<br>";
+    
+    document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
+    document.getElementById("output").innerHTML += "<br>" + String(decryptText(text, key, IV, cipher)).replace(/,/g, "");
+  }
 }
