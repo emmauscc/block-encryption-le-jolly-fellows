@@ -62,9 +62,9 @@ function ASCIIToBinary(character) {
 
 // TODO: Research if code is consistent over multiple hand tests
 function encryptText(text, key, IV, cipher) {
-  if (cipher === "caesar") {
+  if (cipher == "caesar") {
     text = text.split("");
-  } else if (cipher === "vigenere"){
+  } else if (cipher == "vigenere"){
     text = vigenereCipher(text.toUpperCase(), key, 1).split("");
   }
 
@@ -77,7 +77,7 @@ function encryptText(text, key, IV, cipher) {
       text.splice(i, 1, XORgate(text[i], text[i - 1]));
     }
 
-    if (cipher === "caesar") {
+    if (cipher == "caesar") {
       text.splice(i, 1, caesarCipher(text[i], key));
     }
   }
@@ -90,14 +90,14 @@ function encryptionProcess(text, key, IV, cipher) {
   console.log("Using key: " + key);
   console.log("Using IV: " + IV);
 
-  if (cipher === "caesar") {
+  if (cipher == "caesar") {
     if (key > 64 || key <= 0) {
       throw new Error("Encryption key too high or negative! Please keep it lower than or equal to 64");
     }
     console.log("\n");
     console.log("The encrypted text in binary:");
     console.log(encryptText(text, parseInt(key), IV, cipher).join(""));
-  } else if (cipher === "vigenere") {
+  } else if (cipher == "vigenere") {
     console.log("\n");
     console.log("The encrypted text in binary:");
     console.log(encryptText(text, key, IV, cipher).join(""));

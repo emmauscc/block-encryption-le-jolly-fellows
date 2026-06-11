@@ -25,9 +25,9 @@ function ASCIIToBinary(character) {
 
 // TODO: Research if code is consistent over multiple hand tests
 function encryptText(text, key, IV, cipher) {
-  if (cipher === "caesar") {
+  if (cipher == "caesar") {
     text = text.split("");
-  } else if (cipher === "vigenere"){
+  } else if (cipher == "vigenere"){
     text = vigenereCipher(text.toUpperCase(), key, 1).split("");
   }
 
@@ -40,7 +40,7 @@ function encryptText(text, key, IV, cipher) {
       text.splice(i, 1, XORgate(text[i], text[i - 1]));
     }
 
-    if (cipher === "caesar") {
+    if (cipher == "caesar") {
       text.splice(i, 1, caesarCipher(text[i], key));
     }
   }
@@ -48,22 +48,21 @@ function encryptText(text, key, IV, cipher) {
 }
 
 function encryptionProcess(text, key, IV, cipher) {
-  let output = document.getElementById("output");
-  output.innerHTML = "Using IV: " + IV;
+  document.getElementById("output").innerHTML = "Using IV: " + IV;
 
-  if (cipher === "caesar") {
+  if (cipher == "caesar") {
     if (key > 64 || key <= 0) {
-      output.innerHTML = "<br>" + "Encryption key too high or negative! Please keep it lower than or equal to 64";
+      document.getElementById("output").innerHTML = "<br>" + "Encryption key too high or negative! Please keep it lower than or equal to 64";
       return;
     }
-    output.innerHTML += "<br>";
+    document.getElementById("output").innerHTML += "<br>";
 
-    output.innerHTML += "<br>" + "The encrypted text in binary:";
-    output.innerHTML += "<br>" + encryptText(text, parseInt(key), IV, cipher).join("");
-  } else if (cipher === "vigenere") {
-    output.innerHTML += "<br>";
+    document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
+    document.getElementById("output").innerHTML += "<br>" + encryptText(text, parseInt(key), IV, cipher).join("");
+  } else if (cipher == "vigenere") {
+    document.getElementById("output").innerHTML += "<br>";
     
-    output.innerHTML += "<br>" + "The encrypted text in binary:";
-    output.innerHTML += "<br>" + encryptText(text, key, IV, cipher).join("");
+    document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
+    document.getElementById("output").innerHTML += "<br>" + encryptText(text, key, IV, cipher).join("");
   }
 }

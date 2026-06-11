@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 function displayCipherDropdown() {
-  if (document.getElementById("text-input").value !== "") {
+  if (document.getElementById("text-input").value != "") {
     document.getElementById("cipherDropdown").style.display = "inline-block";
     document.getElementById("key-input").style.display = "inline-block";
   } else {
@@ -11,7 +11,7 @@ function displayCipherDropdown() {
 }
 
 function displayModeDropdown() {
-  if (document.getElementById("key-input").value !== "") {
+  if (document.getElementById("key-input").value != "") {
     document.getElementById("modeDropdown").style.display = "inline-block";
     document.getElementById("runButton").style.display = "inline-block";
   } else {

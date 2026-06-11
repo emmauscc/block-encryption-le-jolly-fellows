@@ -19,7 +19,7 @@ if (process.argv.length == 6) {
       rl.question("What was the initialization vector used? ", (initializationVector) => {
         rl.question("Finally, what cipher? (C)aesar/(V)igenere ", (cipherMethod) => {
           console.log("\n");
-          
+
           if (cipherMethod.toLowerCase() == "c" || cipherMethod.toLowerCase() == "caesar") {
             decryptionProcess(textToDecrypt, encryptionKey, initializationVector, "caesar");
           } else if (cipherMethod.toLowerCase() == "v" || cipherMethod.toLowerCase() == "vigenere") {
@@ -40,7 +40,7 @@ function decryptText(text, key, IV, cipher) {
   text = text.match(/.{1,8}/g);
 
   for (let i = text.length - 1; i > -1; i--) {
-    if (cipher === "caesar") {
+    if (cipher == "caesar") {
       text.splice(i, 1, caesarCipher(text[i], -key));
     }
 
@@ -54,7 +54,7 @@ function decryptText(text, key, IV, cipher) {
   for (let i = 0; i < text.length; i++) {
     text.splice(i, 1, String.fromCharCode(parseInt(text[i], 2)));
   }
-  if (cipher === "vigenere"){
+  if (cipher == "vigenere"){
     text = vigenereCipher(text.join(""), key, 0).split("");
   }
   return text;
@@ -66,11 +66,11 @@ function decryptionProcess(text, key, IV, cipher) {
   console.log("Using key: " + key);
   console.log("Using IV: " + IV);
 
-  if (cipher === "caesar") {
+  if (cipher == "caesar") {
     console.log("\n");
     console.log("The decrypted text in plain text:");
     console.log(decryptText(text, parseInt(key), IV, cipher).join(""));
-  } else if (cipher === "vigenere") {
+  } else if (cipher == "vigenere") {
     console.log("\n");
     console.log("The decrypted text in plain text:");
     console.log(decryptText(text, key, IV, cipher).join(""));
