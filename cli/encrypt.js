@@ -1,4 +1,4 @@
-import readline from "readline";
+import readline from "node:readline";
 import { XORgate, caesarCipher, vigenereCipher } from "./common.js";
 
 let initializationVector = randomBinary(8);
