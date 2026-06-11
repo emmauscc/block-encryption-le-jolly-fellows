@@ -1,6 +1,6 @@
 [package]
 name = "block-encryptor"
-version = "1.0.0"
+version = "1.1.0"
 description = "A simple project to implement block encryption with JavaScript"
 authors = ["JM and ID"]
 edition = "2021"
