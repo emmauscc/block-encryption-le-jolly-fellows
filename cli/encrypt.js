@@ -78,7 +78,7 @@ function encryptText(text, key, IV, cipher) {
     }
 
     if (cipher == "caesar") {
-      text.splice(i, 1, caesarCipher(text[i], key, 8));
+      text.splice(i, 1, caesarCipher(text[i], key));
     }
   }
   return text;
@@ -96,11 +96,11 @@ function encryptionProcess(text, key, IV, cipher) {
     }
     console.log("\n");
     console.log("The encrypted text in binary:");
-    console.log(String(encryptText(text, parseInt(key), IV, cipher)).replace(/,/g, ""));
+    console.log(encryptText(text, parseInt(key), IV, cipher).join(""));
   } else if (cipher == "vigenere") {
     console.log("\n");
     console.log("The encrypted text in binary:");
-    console.log(String(encryptText(text, key, IV, cipher)).replace(/,/g, ""));
+    console.log(encryptText(text, key, IV, cipher).join(""));
   }
   console.log("\n");
 }

@@ -41,7 +41,7 @@ function encryptText(text, key, IV, cipher) {
     }
 
     if (cipher == "caesar") {
-      text.splice(i, 1, caesarCipher(text[i], key, 8));
+      text.splice(i, 1, caesarCipher(text[i], key));
     }
   }
   return text;
@@ -58,11 +58,11 @@ function encryptionProcess(text, key, IV, cipher) {
     document.getElementById("output").innerHTML += "<br>";
 
     document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
-    document.getElementById("output").innerHTML += "<br>" + String(encryptText(text, parseInt(key), IV, cipher)).replace(/,/g, "");
+    document.getElementById("output").innerHTML += "<br>" + encryptText(text, parseInt(key), IV, cipher).join("");
   } else if (cipher == "vigenere") {
     document.getElementById("output").innerHTML += "<br>";
     
     document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
-    document.getElementById("output").innerHTML += "<br>" + String(encryptText(text, key, IV, cipher)).replace(/,/g, "");
+    document.getElementById("output").innerHTML += "<br>" + encryptText(text, key, IV, cipher).join("");
   }
 }

@@ -5,7 +5,7 @@ function decryptText(text, key, IV, cipher) {
 
   for (let i = text.length - 1; i > -1; i--) {
     if (cipher == "caesar") {
-      text.splice(i, 1, caesarCipher(text[i], -key, 8));
+      text.splice(i, 1, caesarCipher(text[i], -key));
     }
 
     if (i == 0) {
@@ -31,11 +31,11 @@ function decryptionProcess(text, key, IV, cipher) {
     document.getElementById("output").innerHTML += "<br>";
 
     document.getElementById("output").innerHTML += "<br>" + "The decrypted text in plain text:";
-    document.getElementById("output").innerHTML += "<br>" + String(decryptText(text, parseInt(key), IV, cipher)).replace(/,/g, "");
+    document.getElementById("output").innerHTML += "<br>" + decryptText(text, parseInt(key), IV, cipher).join("");
   } else if (cipher == "vigenere") {
     document.getElementById("output").innerHTML += "<br>";
     
     document.getElementById("output").innerHTML += "<br>" + "The encrypted text in binary:";
-    document.getElementById("output").innerHTML += "<br>" + String(decryptText(text, key, IV, cipher)).replace(/,/g, "");
+    document.getElementById("output").innerHTML += "<br>" + decryptText(text, key, IV, cipher).join("");
   }
 }

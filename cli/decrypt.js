@@ -41,7 +41,7 @@ function decryptText(text, key, IV, cipher) {
 
   for (let i = text.length - 1; i > -1; i--) {
     if (cipher == "caesar") {
-      text.splice(i, 1, caesarCipher(text[i], -key, 8));
+      text.splice(i, 1, caesarCipher(text[i], -key));
     }
 
     if (i == 0) {
@@ -69,11 +69,11 @@ function decryptionProcess(text, key, IV, cipher) {
   if (cipher == "caesar") {
     console.log("\n");
     console.log("The decrypted text in plain text:");
-    console.log(String(decryptText(text, parseInt(key), IV, cipher)).replace(/,/g, ""));
+    console.log(decryptText(text, parseInt(key), IV, cipher).join(""));
   } else if (cipher == "vigenere") {
     console.log("\n");
     console.log("The decrypted text in plain text:");
-    console.log(String(decryptText(text, key, IV, cipher)).replace(/,/g, ""));
+    console.log(decryptText(text, key, IV, cipher).join(""));
   }
 
   console.log("\n");
