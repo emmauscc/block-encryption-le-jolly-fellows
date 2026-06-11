@@ -84,13 +84,6 @@ button:active {
   background-color: #e8e8e8;
 }
 
-#output,
-input,
-select,
-button {
-  outline: none;
-}
-
 #greet-input {
   margin-right: 5px;
 }
@@ -116,7 +109,7 @@ button {
 #cipherDropdown,
 #key-input,
 #modeDropdown,
-#iv-input,i
+#iv-input,
 #runButton {
   display: none;
 }

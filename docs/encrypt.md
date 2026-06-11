@@ -100,16 +100,16 @@ Assignee: `JM`
 2. Loop over every character of `encryptedText`
     - `for (let i = 0; i < encryptedText.length; i++) {`
 3. Send character to `textToASCII` and `ASCIIToBinary` then add it to it's place in the array
-    - `encryptedText.splice(i, 1, ASCIIToBinary(textToASCII(encryptedText[i])));`
+    - `encryptedText[i] = ASCIIToBinary(textToASCII(encryptedText[i]));`
 4. If using the first character use provided `IV` with `XORgate` function and add to array
     - `if (i == 0) {`
-    - `encryptedText.splice(i, 1, XORgate(encryptedText[i], IV));`
+    - `encryptedText[i] = XORgate(encryptedText[i], IV);`
     - `}`
 5. If not then use the last character as the IV and then add it to it's place in the array
     - `else {`
-    - `encryptedText.splice(i, 1, XORgate(encryptedText[i], encryptedText[i - 1]));`
+    - `encryptedText[i] = XORgate(encryptedText[i], encryptedText[i - 1]);`
     - `}`
 6. Send current character to `caesarCipher` with global `encryptionKey` and 8, add to array
-    - `encryptedText.splice(i, 1, caesarCipher(encryptedText[i], encryptionKey, 8));`
+    - `encryptedText[i] = caesarCipher(encryptedText[i], encryptionKey, 8);`
 7. Once loop is complete return `encryptedText`
     - `encryptedText;`
