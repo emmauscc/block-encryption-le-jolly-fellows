@@ -69,16 +69,16 @@ function encryptText(text, key, IV, cipher) {
   }
 
   for (let i = 0; i < text.length; i++) {
-    text[i] = ASCIIToBinary(textToASCII(text[i]));
+    text.splice(i, 1, ASCIIToBinary(textToASCII(text[i])));
 
     if (i == 0) {
-      text[i] = XORgate(text[i], IV);
+      text.splice(i, 1, XORgate(text[i], IV));
     } else {
-      text[i] = XORgate(text[i], text[i - 1]);
+      text.splice(i, 1, XORgate(text[i], text[i - 1]));
     }
 
     if (cipher === "caesar") {
-      text[i] = caesarCipher(text[i], key);
+      text.splice(i, 1, caesarCipher(text[i], key));
     }
   }
   return text;
