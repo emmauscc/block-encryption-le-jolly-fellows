@@ -28,7 +28,7 @@ function encryptText(text, key, IV, cipher) {
   if (cipher == "caesar") {
     text = text.split("");
   } else if (cipher == "vigenere"){
-    text = vigenereCipher(text.toUpperCase(), key, 1).split("");
+    text = vigenereCipher(text.toUpperCase(), key.toUpperCase(), 1).split("");
   }
 
   for (let i = 0; i < text.length; i++) {
