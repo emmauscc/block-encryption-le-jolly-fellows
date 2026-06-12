@@ -61,17 +61,12 @@ function decryptText(text, key, IV, cipher) {
 }
 
 function decryptionProcess(text, key, IV, cipher) {
-  console.log("\n" + "Using cipher: " + cipher);
-  console.log("Using text: " + text);
-  console.log("Using key: " + key);
-  console.log("Using IV: " + IV);
+  console.log("\n");
 
   if (cipher == "caesar") {
-    console.log("\n");
     console.log("The decrypted text in plain text:");
     console.log(decryptText(text, parseInt(key), IV, cipher).join(""));
   } else if (cipher == "vigenere") {
-    console.log("\n");
     console.log("The decrypted text in plain text:");
     console.log(decryptText(text, key, IV, cipher).join(""));
   }

@@ -85,20 +85,15 @@ function encryptText(text, key, IV, cipher) {
 }
 
 function encryptionProcess(text, key, IV, cipher) {
-  console.log("\n" + "Using cipher: " + cipher);
-  console.log("Using text: " + text);
-  console.log("Using key: " + key);
-  console.log("Using IV: " + IV);
+  console.log("\n" + "Using IV: " + IV);
 
   if (cipher == "caesar") {
     if (key > 64 || key <= 0) {
       throw new Error("Encryption key too high or negative! Please keep it lower than or equal to 64");
     }
-    console.log("\n");
     console.log("The encrypted text in binary:");
     console.log(encryptText(text, parseInt(key), IV, cipher).join(""));
   } else if (cipher == "vigenere") {
-    console.log("\n");
     console.log("The encrypted text in binary:");
     console.log(encryptText(text, key, IV, cipher).join(""));
   }
