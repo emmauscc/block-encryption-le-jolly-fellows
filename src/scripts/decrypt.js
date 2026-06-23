@@ -19,7 +19,7 @@ function decryptText(text, key, IV, cipher) {
     text.splice(i, 1, String.fromCharCode(parseInt(text[i], 2)));
   }
   if (cipher == "vigenere"){
-    text = vigenereCipher(text.join(""), key, 0).split("");
+    text = vigenereCipher(text.join(""), key.toUpperCase(), 0).split("");
   }
   return text;
 }
